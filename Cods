@@ -1,0 +1,66 @@
+#define triger 13
+#define echo 12
+int sure, mesafe;
+
+void setup() {
+
+  pinMode(triger, OUTPUT);
+  pinMode(echo, INPUT);
+  pinMode(4,OUTPUT);
+  pinMode(0,OUTPUT);
+  pinMode(2,OUTPUT);
+  Serial.begin(9600);
+  
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  digitalWrite(triger,LOW);
+  delayMicroseconds(5);
+  digitalWrite(triger,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(triger,LOW);
+  sure=pulseIn(echo,HIGH);
+  mesafe=(sure/2)/29;
+  Serial.print("Sistem Çalışıyor");
+  Serial.println(mesafe);
+
+  if(mesafe<10){
+    digitalWrite(4,HIGH);
+    tone(14,600);
+    delay(50);
+      noTone(14);
+      delay(50);
+    }
+
+    if(mesafe>10 && mesafe<20){
+     noTone(14);
+     digitalWrite(4,LOW);
+     digitalWrite(0,HIGH);
+     tone(14,300);
+     delay(100);
+      noTone(14);
+      delay(100);
+       }
+  
+    if(mesafe>20 && mesafe<40){
+      digitalWrite(0,LOW);
+      digitalWrite(4,LOW);
+      digitalWrite(2,HIGH);
+      tone(14,100);
+      delay(200);
+      noTone(14);
+      delay(200);
+      }
+  
+  if(mesafe>40){
+    digitalWrite(0,LOW);
+    digitalWrite(2,LOW);
+    digitalWrite(4,LOW);
+    noTone(14);
+  }
+     
+  // put your main code here, to run repeatedly:
+
+}
